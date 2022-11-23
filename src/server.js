@@ -7,7 +7,7 @@ require('colors');
 var url = require('url');
 var path = require('path');
 var EventEmitter = require('events');
-var openBrowser = require('op-browser');
+var openBrowser = require('@weglot/op-browser');
 var Hosts = require('./hosts');
 var Rewrite = require('./rewrite');
 var getLocalIP = require('./helpers/getLocalIP');

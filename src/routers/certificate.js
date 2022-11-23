@@ -4,15 +4,18 @@
  */
 
 module.exports = function (request, response) {
-  var certTool = require('../../src/helpers/certTool');
-  var os = require('os');
+  var certTool = require("../../src/helpers/certTool");
+  var os = require("os");
   var cert = certTool.getCACertificate();
   var content = cert.certificatePem;
   response.writeHead(200, {
-    'Content-Disposition': 'attachment; filename="Hiproxy-Custom-CA-Certificate-' + os.hostname().replace(/[\._]/g, '-') + '.crt"',
-    'Content-Type': 'application/force-download',
-    'Content-Transfer-Encoding': 'binary',
-    'Content-Length': content.length
+    "Content-Disposition":
+      'attachment; filename="Hiproxy_Custom_CA_Certificate_' +
+      os.hostname().replace(/\./g, "_") +
+      '.crt"',
+    "Content-Type": "application/force-download",
+    "Content-Transfer-Encoding": "binary",
+    "Content-Length": content.length,
   });
   response.end(content);
 };

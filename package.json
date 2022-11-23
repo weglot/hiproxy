@@ -1,6 +1,6 @@
 {
-  "name": "hiproxy",
-  "version": "2.0.0",
+  "name": "@weglot/hiproxy",
+  "version": "1.0.2",
   "description": "hiproxy - lightweight and powerful proxy tool for front-end developer based on Node.js.",
   "main": "src/index.js",
   "bin": {
@@ -17,10 +17,7 @@
     "nt": "cross-env NPM_TEST=true nyc mocha 'test/core/other/*.test.js' --timeout 10000 && nyc report --reporter=lcov --reporter=html",
     "ot": "cross-env NPM_TEST=true nyc mocha 'old_test/**/*.test.js' --timeout 10000 && nyc report --reporter=lcov --reporter=html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hiproxy/hiproxy.git"
-  },
+  "repository": "git@github.com:weglot/hiproxy.git",
   "keywords": [
     "nodejs",
     "proxy",
@@ -39,12 +36,12 @@
   },
   "homepage": "http://hiproxy.org",
   "dependencies": {
+    "@weglot/op-browser": "^1.0.1",
     "colors": "^1.1.2",
     "hemsl": "^1.2.6",
     "hiproxy-conf-parser": "^1.0.8",
     "mustache": "^2.3.0",
     "node-forge": "^0.7.1",
-    "op-browser": "^1.0.6",
     "os-homedir": "^1.0.2",
     "safe-buffer": "^5.1.1",
     "simple-mime": "^0.1.0",
@@ -60,12 +57,6 @@
     "request": "^2.79.0",
     "semistandard": "^10.0.0",
     "set-cookie-parser": "^2.1.1"
-  },
-  "config": {
-    "ghooks": {
-      "pre-commit-1": "./node_modules/.bin/semistandard",
-      "pre-push": "npm test"
-    }
   },
   "files": [
     "src",
@@ -102,5 +93,8 @@
       "src/commands/",
       "test"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }

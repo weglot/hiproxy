@@ -7,7 +7,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var openBrowser = require('op-browser');
+var openBrowser = require('@weglot/op-browser');
 
 var dirtool = require('../helpers/dirTool');
 

@@ -3,11 +3,11 @@
  * @author zdying
  */
 
-'use strict';
+"use strict";
 
-var serverTool = require('./serverTool');
+var serverTool = require("./serverTool");
 
-module.exports = function createServer (ctx, next) {
+module.exports = function createServer(ctx, next) {
   var hiproxy = this;
   var port = this.httpPort;
   var httpsPort = this.httpsPort;
@@ -18,26 +18,30 @@ module.exports = function createServer (ctx, next) {
     promises.push(serverTool.create(httpsPort, true, this.rewrite));
   }
 
-  Promise.all(promises).then(function (servers) {
-    hiproxy.httpServer = servers[0];
-    hiproxy.httpsServer = servers[1];
+  Promise.all(promises)
+    .then(function (servers) {
+      hiproxy.httpServer = servers[0];
+      hiproxy.httpsServer = servers[1];
 
-    hiproxy.httpPort = hiproxy.httpServer.address().port;
-    hiproxy.httpsPort = hiproxy.httpsServer ? hiproxy.httpsServer.address().port : null;
+      hiproxy.httpPort = hiproxy.httpServer.address().port;
+      hiproxy.httpsPort = hiproxy.httpsServer
+        ? hiproxy.httpsServer.address().port
+        : null;
 
-    /**
-     * Emitted when the hiproxy server(s) start.
-     * @event ProxyServer#start
-     * @property {Array} servers http/https server
-     * @property {String} localIP the local ip address
-     */
-    hiproxy.emit('start', {
-      servers: servers,
-      localIP: ctx.localIP
+      /**
+       * Emitted when the hiproxy server(s) start.
+       * @event ProxyServer#start
+       * @property {Array} servers http/https server
+       * @property {String} localIP the local ip address
+       */
+      hiproxy.emit("start", {
+        servers: servers,
+        localIP: ctx.localIP,
+      });
+
+      next();
+    })
+    .catch(function (err) {
+      next(err);
     });
-
-    next();
-  }).catch(function (err) {
-    next(err);
-  });
 };
